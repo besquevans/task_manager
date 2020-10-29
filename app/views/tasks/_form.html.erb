@@ -1,0 +1,41 @@
+<% if task.errors.any? %>
+  <ul>
+    <%= task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: task) do |f| %>
+  <div>
+    <%= f.label "標題" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label "內容" %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+    <%= f.label "開始時間" %>
+    <%= f.date_field :start_at %>
+  </div>
+
+  <div>
+    <%= f.label "結束時間" %>
+    <%= f.date_field :end_at %>
+  </div>
+
+  <div>
+    <%= f.label "優先度" %>
+    <%= f.text_field :priority %>
+  </div>
+
+  <div>
+    <%= f.label "狀態" %>
+    <%= f.text_field :status %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
