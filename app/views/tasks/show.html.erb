@@ -1,0 +1,11 @@
+<h1><%= @task.title %></h1>
+
+<ul>
+  <li><%= @task.content %></li>
+  <li><%= @task.start_at %></li>
+  <li><%= @task.end_at %></li>
+  <li><%= @task.priority %></li>
+  <li><%= @task.status %></li>
+</ul>
+
+<%= link_to "回首頁", root_path %>

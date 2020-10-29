@@ -1,0 +1,33 @@
+<h1>Tasks</h1>
+
+<%= link_to "新增任務", new_task_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>標題</th>
+      <th>開始時間</th>
+      <th>結束時間</th>
+      <th>優先度</th>
+      <th>狀態</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.start_at %></td>
+        <td><%= task.end_at %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
+        <td>
+          <%= link_to "Show", task %>
+          <%= link_to "Edit", edit_task_path(task) %>
+          <%= link_to "Destroy", task, method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
