@@ -18,8 +18,8 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.title %></td>
-        <td><%= task.start_at %></td>
-        <td><%= task.end_at %></td>
+        <td><%= task.start_at.strftime('%Y/%m/%d') if task.start_at %></td>
+        <td><%= task.end_at.strftime('%Y/%m/%d') if task.end_at %></td>
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
         <td>
