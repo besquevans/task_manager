@@ -1,12 +1,12 @@
 <% if task.errors.any? %>
   <ul>
-    <%= task.errors.full_messages.each do |message| %>
+    <% task.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
 <% end %>
 
-<%= form_with(model: task) do |f| %>
+<%= form_with(model: task, local: true) do |f| %>
   <div>
     <%= f.label t("task.title") %>
     <%= f.text_field :title %>
