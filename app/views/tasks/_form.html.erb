@@ -1,41 +1,45 @@
 <% if task.errors.any? %>
   <ul>
-    <%= task.errors.full_messages.each do |message| %>
+    <% task.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
 <% end %>
 
-<%= form_with(model: task) do |f| %>
+<%= form_with(model: task, local: true) do |f| %>
   <div>
     <%= f.label t("task.title") %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class:"form-control" %>
   </div>
 
   <div>
     <%= f.label t("task.content") %>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, class:"form-control" %>
   </div>
 
   <div>
     <%= f.label t("task.start_at") %>
-    <%= f.date_field :start_at %>
+    <%= f.date_field :start_at, class:"form-control" %>
   </div>
 
   <div>
     <%= f.label t("task.end_at") %>
-    <%= f.date_field :end_at %>
+    <%= f.date_field :end_at, class:"form-control" %>
   </div>
 
   <div>
     <%= f.label t("task.priority") %>
-    <%= f.text_field :priority %>
+    <select name="task[priority]" class="form-control" id="form-priority">
+      <%= options_for_select(t("task.priority_option").map(&:reverse)) %>
+    </select>
   </div>
 
   <div>
     <%= f.label t("task.status") %>
-    <%= f.text_field :status %>
+    <select name="task[status]" class="form-control" id="form-status">
+      <%= options_for_select(t("task.status_option").map(&:reverse)) %>
+    </select>
   </div>
 
-  <%= f.submit t(:send) %>
+  <%= f.submit t(:send), class: "btn btn-primary" %>
 <% end %>

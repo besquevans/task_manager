@@ -20,8 +20,8 @@
         <td><%= task.title %></td>
         <td><%= task.start_at.strftime('%Y/%m/%d') if task.start_at %></td>
         <td><%= task.end_at.strftime('%Y/%m/%d') if task.end_at %></td>
-        <td><%= task.priority %></td>
-        <td><%= task.status %></td>
+        <td><%= t("task.priority_option")[task.priority] %></td>
+        <td><%= t("task.status_option")[task.status] %></td>
         <td>
           <%= link_to "Show", task %>
           <%= link_to "Edit", edit_task_path(task) %>
