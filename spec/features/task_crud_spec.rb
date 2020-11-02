@@ -36,8 +36,8 @@ RSpec.feature "Read task", :type => :feature do
       fill_in :task_content,	with: "New Content"
       fill_in :task_start_at,	with: Time.now
       fill_in :task_end_at,	with: Time.now + 1.day
-      fill_in :task_priority,	with: "高"
-      fill_in :task_status,	with: "進行中"
+      select "高", from: "form-priority"
+      select "進行中", from: "form-status"
       click_button("送出")
       expect(page).to have_content("新增任務成功！")
     end
@@ -51,8 +51,8 @@ RSpec.feature "Read task", :type => :feature do
       fill_in :task_content,	with: "New Content"
       fill_in :task_start_at,	with: Time.now
       fill_in :task_end_at,	with: Time.now + 1.day
-      fill_in :task_priority,	with: "高"
-      fill_in :task_status,	with: "進行中"
+      select "高", from: "form-priority"
+      select "進行中", from: "form-status"
       click_button("送出")
       expect(page).to have_content("更新任務成功！")
     end
