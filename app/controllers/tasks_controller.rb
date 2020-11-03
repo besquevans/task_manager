@@ -2,7 +2,12 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.order(created_at: :desc)
+    if params[:order] == "end_at"
+      @tasks = Task.order(:end_at)
+      render json: @tasks
+    else
+      @tasks = Task.order(created_at: :desc)
+    end
   end
 
   def show
