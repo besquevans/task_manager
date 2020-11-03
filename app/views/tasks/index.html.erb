@@ -1,13 +1,13 @@
-<h1>Tasks</h1>
+<h1 id="tasks_title">Tasks</h1>
 
 <%= link_to "新增任務", new_task_path %>
 
 <table>
   <thead>
     <tr>
-      <th>標題</th>
+      <th><%= t("task.title") %></th>
       <th>開始時間</th>
-      <th>結束時間</th>
+      <th class="end_at"><button class="btn">結束時間</button></th>
       <th>優先度</th>
       <th>狀態</th>
       <th>操作</th>
@@ -31,3 +31,19 @@
     <% end %>
   </tbody>
 </table>
+
+
+<template id="task-template">
+  <tr>
+    <td class="title">title</td>
+    <td class="start_at">start_at</td>
+    <td class="end_at">end_at</td>
+    <td class="priority">priority</td>
+    <td class="status">status</td>
+    <td>
+      <a class="show" href="">Show</a>
+      <a class="edit" href="">Edit</a>
+      <a class="delete" href="" data-method="delete" data-confirm="Are you sure?">Destroy</a>
+    </td>
+  </tr>
+</template>
