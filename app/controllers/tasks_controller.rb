@@ -2,20 +2,20 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: :desc)
   end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = Task.new(start_at: Time.now)
   end
 
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "新增任務成功！"
+      redirect_to tasks_path, notice: I18n.t("task.create_success")
     else
       render :new
     end
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "更新任務成功！"
+      redirect_to tasks_path, notice: I18n.t("task.update_success")
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, alert: "刪除任務成功！"
+    redirect_to tasks_path, alert: I18n.t("task.delete_success")
   end
 
   private
