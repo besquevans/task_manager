@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Sort tasks", type: :feature, driver: :chrome, js: true, slow: true do
+RSpec.feature "Sort tasks", type: :feature, js: true, slow: true do
   context "default" do
     it "sort by created_at" do
       (1..5).each do |i|

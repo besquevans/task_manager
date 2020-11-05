@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true  do
+RSpec.feature "Read task", type: :feature, js: true, slow: true  do
 
   context "index" do
     it "create 2 tasks" do
