@@ -7,14 +7,10 @@ document.addEventListener("turbolinks:load", () => {
   document.querySelector("thead tr").addEventListener("click", (e) => sortTasks(e))
 
   function sortTasks({target}) {
-    console.log("123")
-    console.log(target)
-    console.log(target.parentNode.classList[0])
     Rails.ajax({
       url: `/tasks?order=${target.parentNode.classList[0]}`,
       type: "GET",
       success: function(data){
-        console.log(data)
         document.querySelector("tbody").innerHTML = ""
         data.forEach((taskData) => {
           const task = createTask(taskData)
