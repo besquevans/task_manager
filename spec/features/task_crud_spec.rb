@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Read task", type: :feature, js: true, slow: true  do
+RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true  do
 
   context "index" do
     it "create 2 tasks" do
@@ -66,7 +66,7 @@ RSpec.feature "Read task", type: :feature, js: true, slow: true  do
       visit tasks_path
       expect(page).to have_content("Test Task", count: 2)
       expect(page).to have_content("Selected Task", count: 1)
-      page.all("tbody tr")[1].click_link("Destroy")
+      find("tr", text: "Selected Task").click_link("Destroy")
       page.driver.browser.switch_to.alert.accept #確認刪除
       expect(page).to have_content("Test Task", count: 2)
       expect(page).to have_no_content("Selected Task")

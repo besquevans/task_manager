@@ -1,13 +1,38 @@
-<h1 id="tasks_title">Tasks</h1>
+<h1 id="tasks_title"><%= link_to "Tasks", tasks_path %></h1>
 
-<%= link_to "新增任務", new_task_path %>
+<%= link_to t("task.new"), new_task_path %>
+
+<%= search_form_for @q do |f| %>
+  <div class="row">
+    <div class="col">
+      <% f.label :title_cont, t("task.title") %>
+      <%= f.search_field :title_cont, placeholder: t("task.title"), class: 'form-control' %>
+    </div>
+
+    <div class="col">
+      <%= f.select :status_eq,
+        t("task.status_option").map(&:reverse),
+        {
+          selected: "",
+          disabled: "",
+          prompt: t("task.select_status")
+        },
+        { class: 'form-control' }
+      %>
+    </div>
+
+    <div class="col">
+      <%= f.submit t(:search) %>
+    </div>
+  </div>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th><%= t("task.title") %></th>
       <th><%= t("task.start_at") %></th>
-      <th class="end_at"><button class="btn"><%= t("task.end_at") %></button></th>
+      <th class="end_at"><%= sort_link(@q, :end_at, t("task.end_at")) %></th>
       <th><%= t("task.priority") %></th>
       <th><%= t("task.status") %></th>
       <th>#</th>
@@ -17,7 +42,7 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.title %></td>
+        <td class="task-title"><%= task.title %></td>
         <td><%= task.start_at.strftime('%Y/%m/%d') if task.start_at %></td>
         <td><%= task.end_at.strftime('%Y/%m/%d') if task.end_at %></td>
         <td><%= t("task.priority_option")[task.priority] %></td>
@@ -25,14 +50,14 @@
         <td>
           <%= link_to "Show", task %>
           <%= link_to "Edit", edit_task_path(task) %>
-          <%= link_to "Destroy", task, method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= link_to "Destroy", task, method: :delete, data: { confirm: t("task.confirm_delete") } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-
+<%#
 <template id="task-template">
   <tr>
     <td class="title">title</td>
@@ -46,4 +71,4 @@
       <a class="delete" href="" data-method="delete" data-confirm="Are you sure?">Destroy</a>
     </td>
   </tr>
-</template>
+</template> %>
