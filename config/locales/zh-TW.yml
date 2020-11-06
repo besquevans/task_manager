@@ -40,6 +40,8 @@ zh-TW:
     create_success: "新增任務成功！"
     update_success: "更新任務成功！"
     delete_success: "刪除任務成功！"
+    confirm_delete: "確認刪除嗎？"
+    select_status: "選擇任務狀態"
     priority_option:
       0: "低"
       1: "中"
@@ -48,5 +50,7 @@ zh-TW:
       0: "待處理"
       1: "進行中"
       2: "完成"
+    new: "新增任務"
 
   send: "送出"
+  search: "搜尋"
