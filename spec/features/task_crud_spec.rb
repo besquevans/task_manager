@@ -36,10 +36,14 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
       fill_in :task_content,	with: "New Content"
       fill_in :task_start_at,	with: Time.now
       fill_in :task_end_at,	with: Time.now + 1.day
-      select "高", from: "form-priority"
-      select "進行中", from: "form-status"
-      click_button("送出")
-      expect(page).to have_content("新增任務成功！")
+      #高
+      select(I18n.t("task.priority_option")[0], from: "form-priority")
+      #進行中
+      select(I18n.t("task.status_option")[1], from: "form-status")
+      #送出
+      click_button(I18n.t(:send))
+      #notice 新增任務成功！
+      expect(page).to have_content(I18n.t("task.create_success"))
     end
   end
 
@@ -51,10 +55,14 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
       fill_in :task_content,	with: "New Content"
       fill_in :task_start_at,	with: Time.now
       fill_in :task_end_at,	with: Time.now + 1.day
-      select "高", from: "form-priority"
-      select "進行中", from: "form-status"
-      click_button("送出")
-      expect(page).to have_content("更新任務成功！")
+      #高
+      select(I18n.t("task.priority_option")[0], from: "form-priority")
+      #進行中
+      select(I18n.t("task.status_option")[1], from: "form-status")
+      #送出
+      click_button(I18n.t(:send))
+      #notice 更新任務成功！
+      expect(page).to have_content(I18n.t("task.update_success"))
     end
   end
 
@@ -70,7 +78,8 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
       page.driver.browser.switch_to.alert.accept #確認刪除
       expect(page).to have_content("Test Task", count: 2)
       expect(page).to have_no_content("Selected Task")
-      expect(page).to have_content("刪除任務成功！")
+      #notice 刪除任務成功！
+      expect(page).to have_content(I18n.t("task.delete_success"))
     end
   end
 end
