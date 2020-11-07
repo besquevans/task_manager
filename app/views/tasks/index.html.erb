@@ -32,8 +32,8 @@
     <tr>
       <th><%= t("task.title") %></th>
       <th><%= t("task.start_at") %></th>
-      <th class="end_at"><%= sort_link(@q, :end_at, t("task.end_at")) %></th>
-      <th><%= t("task.priority") %></th>
+      <th class="end_at"><%= sort_link(@q, :end_at, t("task.end_at"), default_order: :asc) %></th>
+      <th class="priority"><%= sort_link(@q, :priority, t("task.priority"), default_order: :desc) %></th>
       <th><%= t("task.status") %></th>
       <th>#</th>
     </tr>
