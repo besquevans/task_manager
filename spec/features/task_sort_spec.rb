@@ -25,7 +25,7 @@ RSpec.feature "Sort tasks", type: :feature, driver: :chrome, js: true, slow: tru
 
       expect(page.find(".end_at a").text).to eq(I18n.t("task.end_at"))
       click_link(I18n.t("task.end_at"))
-      expect(page).to have_content("Task 1")
+      sleep(0.1)
       task_names = page.all("td.task-title").map(&:text)
       expect(task_names).to eq(["Task 1", "Task 3", "Task 2"])
     end
@@ -44,7 +44,7 @@ RSpec.feature "Sort tasks", type: :feature, driver: :chrome, js: true, slow: tru
 
       expect(page.find(".priority a").text).to eq(I18n.t("task.priority"))
       click_link(I18n.t("task.priority"))
-      expect(page).to have_content("Task 1")
+      sleep(0.1)
       task_names = page.all("td.task-title").map(&:text)
       expect(task_names).to eq(["Task 3", "Task 1", "Task 2"])
     end
