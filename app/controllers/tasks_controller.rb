@@ -3,14 +3,14 @@ class TasksController < ApplicationController
 
   def index
     @q = Task.ransack(params[:q])
-    @tasks = @q.result(distinct: true).order(created_at: :desc)
+    @tasks = @q.result.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def show
   end
 
   def new
-    @task = Task.new(start_at: Time.now)
+    @task = Task.new(start_at: Time.zone.now, end_at: Time.zone.now + 1.day)
   end
 
   def create

@@ -1,0 +1,13 @@
+a {
+  text-decoration:none !important;
+}
+
+nav.pagination {
+  justify-content: center;
+  span {
+    border: 1px #aaa solid;
+    border-radius: 5px;
+    padding: 2px 9px;
+    margin-right: 2px;
+  }
+}
