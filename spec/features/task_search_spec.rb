@@ -1,10 +1,14 @@
 require "rails_helper"
 
 RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: true do
+  before(:each) do
+    @user = create(:user)
+  end
+
   context "title" do
     it "search target task" do
-      create(:task)
-      create(:task, title: "Target Task")
+      create(:task, user: @user)
+      create(:task, title: "Target Task", user: @user)
 
       visit tasks_path
       expect(page).to have_content("Test Task", count: 1)
@@ -20,9 +24,9 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
 
   context "status" do
     it "search finish task" do
-      create(:task, status: 0)
-      create(:task, status: 1)
-      create(:task, status: 2)
+      create(:task, status: 0, user: @user)
+      create(:task, status: 1, user: @user)
+      create(:task, status: 2, user: @user)
 
       visit tasks_path
       expect(find("tbody")).to have_content(I18n.t("task.status_option")[0]).and have_content(I18n.t("task.status_option")[1]).and have_content(I18n.t("task.status_option")[2])

@@ -1,18 +1,21 @@
 require "rails_helper"
 
 RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true  do
+  before(:each) do
+    @user = create(:user)
+  end
 
   context "index" do
     it "create 2 tasks" do
-      task1 = create(:task)
-      task2 = create(:task)
+      task1 = create(:task, user: @user)
+      task2 = create(:task, user: @user)
 
       expect(Task.all.to_a).to eq([task1, task2])
     end
 
     it "read 2 tasks" do
-      task1 = create(:task)
-      task2 = create(:task)
+      task1 = create(:task, user: @user)
+      task2 = create(:task, user: @user)
       visit root_path
 
       expect(page).to have_content("Test Task", count: 2)
@@ -21,9 +24,9 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
 
   context "show" do
     it "read selected task" do
-      task = create(:task)
+      task = create(:task, user: @user)
       selected_task = create :task, title: "Selected Task"
-      task = create(:task)
+      task = create(:task, user: @user)
       visit task_path(selected_task.id)
       expect(page).to have_content("Selected Task")
     end
@@ -31,6 +34,7 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
 
   context "new and create" do
     it "create task" do
+      pending "wait user login"
       visit new_task_path
       fill_in :task_title,	with: "New Task"
       fill_in :task_content,	with: "New Content"
@@ -49,7 +53,7 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
 
   context "edit and update" do
     it "update task" do
-      task = create(:task)
+      task = create(:task, user: @user)
       visit edit_task_path(task)
       fill_in :task_title,	with: "New Task"
       fill_in :task_content,	with: "New Content"
@@ -68,9 +72,9 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
 
   context "destory" do
     it "destory task" do
-      task = create(:task)
+      task = create(:task, user: @user)
       selected_task = create :task, title: "Selected Task"
-      task = create(:task)
+      task = create(:task, user: @user)
       visit tasks_path
       expect(page).to have_content("Test Task", count: 2)
       expect(page).to have_content("Selected Task", count: 1)

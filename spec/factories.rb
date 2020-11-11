@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :task do
+    user { User.first }
     title { "Test Task" }
     content  { "Test Task Content" }
     start_at { Time.zone.now }
@@ -9,6 +10,7 @@ FactoryBot.define do
   end
 
   factory :user do
-    title { "Test User"}
+    email { "test@mail.com"}
+    password { "123456" }
   end
 end
