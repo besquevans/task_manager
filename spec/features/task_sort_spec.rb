@@ -1,10 +1,14 @@
 require "rails_helper"
 
 RSpec.feature "Sort tasks", type: :feature, driver: :chrome, js: true, slow: true do
+  before(:each) do
+    @user = create(:user)
+  end
+
   context "created_at" do
     it "default sort" do
       (1..5).each do |i|
-        create(:task, title: "Task #{i}")
+        create(:task, title: "Task #{i}", user: @user)
       end
       visit tasks_path
 
@@ -15,9 +19,9 @@ RSpec.feature "Sort tasks", type: :feature, driver: :chrome, js: true, slow: tru
 
   context "end_at" do
     it "click link and sort" do
-      create(:task, title: "Task 1", end_at: Time.zone.now)
-      create(:task, title: "Task 2", end_at: Time.zone.now + 2.day)
-      create(:task, title: "Task 3", end_at: Time.zone.now + 1.day)
+      create(:task, user: @user, title: "Task 1", end_at: Time.zone.now)
+      create(:task, user: @user, title: "Task 2", end_at: Time.zone.now + 2.day)
+      create(:task, user: @user, title: "Task 3", end_at: Time.zone.now + 1.day)
       visit tasks_path
 
       task_names = page.all("td.task-title").map(&:text)
@@ -33,9 +37,9 @@ RSpec.feature "Sort tasks", type: :feature, driver: :chrome, js: true, slow: tru
 
   context "priority" do
     it "click link and sort" do
-      create(:task, title: "Task 1", priority: 1)
-      create(:task, title: "Task 2", priority: 0)
-      create(:task, title: "Task 3", priority: 2)
+      create(:task, user: @user, title: "Task 1", priority: 1)
+      create(:task, user: @user, title: "Task 2", priority: 0)
+      create(:task, user: @user, title: "Task 3", priority: 2)
 
       visit tasks_path
 
