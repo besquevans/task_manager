@@ -52,6 +52,14 @@ zh-TW:
       2: "完成"
     new: "新增任務"
 
+  user:
+    email: "信箱"
+    password: "密碼"
+    password_confirmation: "密碼確認"
+    sign_up: "註冊"
+    sign_up_success: "註冊成功"
+    login_success: "登入成功"
+
   send: "送出"
   search: "搜尋"
   #kaminari
