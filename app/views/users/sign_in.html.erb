@@ -1,0 +1,13 @@
+<%= form_with(model: @user, url: login_users_path, local: true) do |f| %>
+  <div>
+    <%= f.label t("user.email") %>
+    <%= f.text_field :email, class:"form-control" %>
+  </div>
+
+  <div>
+    <%= f.label t("user.password") %>
+    <%= f.text_field :password, class:"form-control" %>
+  </div>
+
+  <%= f.submit t("user.login"), class: "btn btn-primary" %>
+<% end %>
