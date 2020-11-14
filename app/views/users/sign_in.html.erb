@@ -1,13 +1,13 @@
-<%= form_with(model: @user, url: login_users_path, local: true) do |f| %>
-  <div>
-    <%= f.label t("user.email") %>
+<%= form_with(model: @user, url: login_users_path, local: true, class: "col-sm-6 mt-5 mx-auto") do |f| %>
+  <div class="form-group">
+    <%= f.label t("user.email"), class: "d-block text-center" %>
     <%= f.text_field :email, class:"form-control" %>
   </div>
 
-  <div>
-    <%= f.label t("user.password") %>
-    <%= f.text_field :password, class:"form-control" %>
+  <div class="form-group">
+    <%= f.label t("user.password"), class: "d-block text-center" %>
+    <%= f.password_field :password, class:"form-control" %>
   </div>
 
-  <%= f.submit t("user.login"), class: "btn btn-primary" %>
+  <%= f.submit t("user.login"), class: "btn btn-primary m-auto d-block" %>
 <% end %>
