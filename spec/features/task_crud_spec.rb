@@ -2,7 +2,12 @@ require "rails_helper"
 
 RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true  do
   before(:each) do
-    @user = create(:user)
+    visit sign_up_users_path
+    fill_in :user_email,	with: "user1@mail.com"
+    fill_in :user_password,	with: "123456"
+    fill_in :user_password_confirmation,	with: "123456"
+    click_button(I18n.t("user.sign_up"))
+    @user = User.first
   end
 
   context "index" do
@@ -16,7 +21,7 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
     it "read 2 tasks" do
       task1 = create(:task, user: @user)
       task2 = create(:task, user: @user)
-      visit root_path
+      visit tasks_path
 
       expect(page).to have_content("Test Task", count: 2)
     end
@@ -34,7 +39,6 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
 
   context "new and create" do
     it "create task" do
-      pending "wait user login"
       visit new_task_path
       fill_in :task_title,	with: "New Task"
       fill_in :task_content,	with: "New Content"
