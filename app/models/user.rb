@@ -4,4 +4,8 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :tasks, dependent: :destroy
+
+  def current_user
+    User.find(session[:user_id])
+  end
 end

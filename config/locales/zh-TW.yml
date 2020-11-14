@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 zh-TW:
+  tasks_manager: 任務管理系統
   task:
     title: "標題"
     content: "內容"
@@ -57,8 +58,13 @@ zh-TW:
     password: "密碼"
     password_confirmation: "密碼確認"
     sign_up: "註冊"
+    login: "登入"
+    sign_out: "登出"
+    sign_out_confirm: "確認登出嗎？"
     sign_up_success: "註冊成功"
     login_success: "登入成功"
+    sign_out_success: "登出成功"
+    email_or_password_invalid: "信箱或密碼錯誤"
 
   send: "送出"
   search: "搜尋"
