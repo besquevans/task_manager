@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     it "email" do
       user = User.new(email: nil)
       expect(user).to_not be_valid
-      user = create(:user, email: "New User")
+      user = create(:user, email: "New_User@mail.com")
       expect(user).to be_valid
     end
 

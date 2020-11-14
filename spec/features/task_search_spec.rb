@@ -2,7 +2,12 @@ require "rails_helper"
 
 RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: true do
   before(:each) do
-    @user = create(:user)
+    visit sign_up_users_path
+    fill_in :user_email,	with: "user1@mail.com"
+    fill_in :user_password,	with: "123456"
+    fill_in :user_password_confirmation,	with: "123456"
+    click_button(I18n.t("user.sign_up"))
+    @user = User.first
   end
 
   context "title" do
