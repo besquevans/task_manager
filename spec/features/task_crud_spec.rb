@@ -25,6 +25,15 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
 
       expect(page).to have_content("Test Task", count: 2)
     end
+
+    it "read only self tasks" do
+      my_task = create(:task, user: @user, title: "My Task")
+      other = create(:user)
+      other_task = create(:task, user: other, title: "Other Task")
+
+      visit tasks_path
+      expect(page).to have_content("My Task", count: 1)
+    end
   end
 
   context "show" do

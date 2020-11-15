@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @q = Task.ransack(params[:q])
+    @q = current_user.tasks.ransack(params[:q])
     @tasks = @q.result.page(params[:page]).per(5).order(created_at: :desc)
   end
 
