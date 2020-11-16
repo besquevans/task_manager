@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :logged_in?, :current_user
+  helper_method :logged_in?, :current_user, :admin?
   before_action :authorized
 
   def current_user
@@ -14,5 +14,9 @@ class ApplicationController < ActionController::Base
 
   def authorized
     redirect_to sign_in_users_path unless logged_in?
+  end
+
+  def admin?
+    current_user.role == "admin"
   end
 end

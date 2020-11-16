@@ -9,4 +9,8 @@ Rails.application.routes.draw do
       delete :sign_out
     end
   end
+
+  namespace :admin do
+    resources :users
+  end
 end

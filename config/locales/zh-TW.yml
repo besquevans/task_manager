@@ -65,6 +65,7 @@ zh-TW:
     login_success: "登入成功"
     sign_out_success: "登出成功"
     email_or_password_invalid: "信箱或密碼錯誤"
+    user_list: "使用者列表"
 
   send: "送出"
   search: "搜尋"
