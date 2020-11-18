@@ -7,6 +7,7 @@
     <tr>
       <th>Id</th>
       <th>E-mail</th>
+      <th>Task Count</th>
       <th>Role</th>
       <th>#</th>
     </tr>
@@ -17,8 +18,8 @@
       <tr>
         <td><%= user.id %></td>
         <td><%= user.email %></td>
+        <td><%= user.tasks_count %></td>
         <td <%= 'style=color:red' if user.role == "admin" %>><%= user.role %></td>
-
         <td>
           <%= link_to "Show", admin_user_path(user), class: "btn btn-outline-primary" %>
           <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-outline-primary" %>
