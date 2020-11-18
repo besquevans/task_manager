@@ -1,9 +1,15 @@
 class Admin::UsersController < ApplicationController
   before_action :admin_authorized
-  before_action :find_user, only: [:edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.page(params[:page]).per(10)
+  end
+
+  def show
+    @q = @user.tasks.ransack(params[:q])
+    @tasks = @q.result.page(params[:page]).per(5).order(created_at: :desc)
+    render template: "tasks/index"
   end
 
   def new

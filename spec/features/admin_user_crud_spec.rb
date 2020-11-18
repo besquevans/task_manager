@@ -2,24 +2,35 @@ require "rails_helper"
 
 RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow: true  do
   before(:each) do
-    email = "root@mail.com"
+    @admin = "root@mail.com"
     role = "admin"
     @password = "123456"
-    user = create(:user, email: email, role: role)
+    user = create(:user, email: @admin, role: role)
     visit sign_in_users_path
-    fill_in :user_email,	with: email
+    fill_in :user_email,	with: @admin
     fill_in :user_password,	with: @password
     click_button(I18n.t("user.login"))
   end
 
   context "index" do
-    it "saw 2 users" do
+    it "find 2 users" do
       create(:user, email: "test1@mail.com")
       create(:user, email: "test2@mail.com")
 
       visit admin_users_path
       expect(page).to have_content("test1@mail.com")
       expect(page).to have_content("test2@mail.com")
+    end
+
+    it "find user tasks count" do
+      user = create(:user)
+      visit admin_users_path
+      expect(find("tr", text: "test@mail.com")).to have_content("0")
+
+      create(:task, user: user)
+      create(:task, user: user)
+      visit admin_users_path
+      expect(find("tr", text: "test@mail.com")).to have_content("2")
     end
   end
 
@@ -47,6 +58,17 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
 
       expect(page).to have_content(I18n.t("user.create_success"))
       expect(page).to have_content("admin", count: 2)
+    end
+  end
+
+  context "show" do
+    it "find user all tasks" do
+      create(:task, title: "task1")
+      create(:task, title: "task2")
+      visit admin_users_path
+      find("tr", text: @admin).click_link("Show")
+      expect(page).to have_content("task1")
+      expect(page).to have_content("task2")
     end
   end
 

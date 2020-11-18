@@ -4,5 +4,5 @@ class Task < ApplicationRecord
   validates :priority, presence: true
   validates :status, presence: true
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
 end
