@@ -13,4 +13,10 @@ FactoryBot.define do
     email { "test@mail.com"}
     password { "123456" }
   end
+
+  factory :admin, class: User do
+    email { "root@mail.com" }
+    password { "123456" }
+    role { "admin" }
+  end
 end
