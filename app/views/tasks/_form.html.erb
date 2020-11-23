@@ -41,5 +41,12 @@
     </select>
   </div>
 
+  <div>
+    <%= f.label :tag_list, "Tag" %>
+    <select name="task[tag_list][]" multiple= "multiple" class="form-control select2_field" id="form-tag_list">
+      <%= options_for_select(task.tag_list, task.tag_list) %>
+    </select>
+  </div>
+
   <%= f.submit t(:send), class: "btn btn-primary" %>
 <% end %>

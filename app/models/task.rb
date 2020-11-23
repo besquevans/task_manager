@@ -5,6 +5,5 @@ class Task < ApplicationRecord
   validates :status, presence: true
 
   belongs_to :user, counter_cache: true
-
   acts_as_taggable_on :tags
 end

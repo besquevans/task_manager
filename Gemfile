@@ -35,6 +35,7 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'figaro', '~> 1.2'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'   #加密
 gem 'acts-as-taggable-on', '~> 6.5'   #tag
+gem 'select2-rails', '~> 4.0', '>= 4.0.13' #tag select
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
