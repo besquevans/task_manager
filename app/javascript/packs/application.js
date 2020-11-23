@@ -13,8 +13,13 @@ import "./style.scss"
 import "bootstrap/dist/css/bootstrap.css"
 import "popper.js"
 import "bootstrap"
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
+import "./select2_field.js"
 import I18n from "i18n-js";
 global.I18n = I18n;
+global.$ = $;
 // import "./tasks_sort.js"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
