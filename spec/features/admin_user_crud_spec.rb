@@ -15,7 +15,7 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
     click_button(I18n.t("user.login"))
   end
 
-  describe "index" do
+  describe "#index" do
     context "at begining" do
       before do
         user
@@ -38,15 +38,14 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
       end
 
       it "show tasks count 2" do
-        create(:task, user: user)
-        create(:task, user: user)
+        2.times { create(:task, user: user) }
         visit admin_users_path
         expect(find("tr", text: default_email)).to have_content("2")
       end
     end
   end
 
-  describe "show" do
+  describe "#show" do
     context "show owner tasks" do
       before do
         create(:task, title: "task1")
@@ -62,13 +61,13 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
     end
   end
 
-  describe "create" do
+  describe "#create" do
     context "create 1 user" do
       before do
         visit new_admin_user_path
-        fill_in :user_email,	with: new_user_email
-        fill_in :user_password,	with: password
-        fill_in :user_password_confirmation,	with: password
+        fill_in :user_email,  with: new_user_email
+        fill_in :user_password,  with: password
+        fill_in :user_password_confirmation,  with: password
         click_button(I18n.t(:send))
       end
 
@@ -84,9 +83,9 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
     context "create 1 admin" do
       before do
         visit new_admin_user_path
-        fill_in :user_email,	with: new_user_email
-        fill_in :user_password,	with: password
-        fill_in :user_password_confirmation,	with: password
+        fill_in :user_email,  with: new_user_email
+        fill_in :user_password,  with: password
+        fill_in :user_password_confirmation,  with: password
         select(I18n.t("user.role_option")[:admin], from: "user[role]")
         click_button(I18n.t(:send))
       end
@@ -97,7 +96,7 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
     end
   end
 
-  describe "update" do
+  describe "#update" do
     context "update user email" do
       let(:new_email){ "new_email@mail.com" }
 
@@ -133,7 +132,7 @@ RSpec.feature "Admin User CRUD", type: :feature, driver: :chrome, js: true, slow
     end
   end
 
-  describe "destroy" do
+  describe "#destroy" do
     context "destroy 1 user" do
       let(:selected_user){ "selected_user@mail.com" }
 

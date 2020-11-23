@@ -8,12 +8,12 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
   before do
     create(:user)
     visit sign_in_users_path
-    fill_in :user_email,	with: default_email
-    fill_in :user_password,	with: password
+    fill_in :user_email,  with: default_email
+    fill_in :user_password,  with: password
     click_button(I18n.t("user.login"))
   end
 
-  describe "index" do
+  describe "#index" do
     context "create 2 tasks" do
       before do
         create(:task, title: "task1")
@@ -35,11 +35,11 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
     end
   end
 
-  describe "show" do
+  describe "#show" do
     context "at selected task show" do
       before do
         task = create(:task)
-        selected_task = create :task, title: "Selected Task"
+        selected_task = create(:task, title: "Selected Task")
         task = create(:task)
         visit task_path(selected_task.id)
       end
@@ -50,16 +50,16 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
     end
   end
 
-  describe "create" do
+  describe "#create" do
     context "create new task" do
       let(:new_task_title){ "New Task" }
 
       before do
         visit new_task_path
-        fill_in :task_title,	with: new_task_title
-        fill_in :task_content,	with: "New Task Content"
-        fill_in :task_start_at,	with: Time.now
-        fill_in :task_end_at,	with: Time.now + 1.day
+        fill_in :task_title,  with: new_task_title
+        fill_in :task_content,  with: "New Task Content"
+        fill_in :task_start_at,  with: Time.now
+        fill_in :task_end_at,  with: Time.now + 1.day
         #低
         select(I18n.t("task.priority_option")[0], from: "form-priority")
         #進行中
@@ -87,17 +87,17 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
     end
   end
 
-  describe "update" do
+  describe "#update" do
     context "update 1 task" do
       let(:renew_task_title){ "Renew Task Title" }
 
       before do
         task = create(:task)
         visit edit_task_path(task)
-        fill_in :task_title,	with: renew_task_title
-        fill_in :task_content,	with: "Renew Task Content"
-        fill_in :task_start_at,	with: Time.now
-        fill_in :task_end_at,	with: Time.now + 1.day
+        fill_in :task_title,  with: renew_task_title
+        fill_in :task_content,  with: "Renew Task Content"
+        fill_in :task_start_at,  with: Time.now
+        fill_in :task_end_at,  with: Time.now + 1.day
         #高
         select(I18n.t("task.priority_option")[2], from: "form-priority")
         #完成
@@ -125,7 +125,7 @@ RSpec.feature "Read task", type: :feature, driver: :chrome, js: true, slow: true
     end
   end
 
-  describe "destroy" do
+  describe "#destroy" do
     context "destory 1 task" do
       before do
         task = create(:task)
