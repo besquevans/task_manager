@@ -1,11 +1,12 @@
 <h1><%= @task.title %></h1>
 
 <ul>
-  <li><%= @task.content %></li>
-  <li><%= @task.start_at %></li>
-  <li><%= @task.end_at %></li>
-  <li><%= @task.priority %></li>
-  <li><%= @task.status %></li>
+  <li><%= "#{t("task.content")} : #{@task.content}" %></li>
+  <li><%= "#{t("task.start_at")} : #{@task.start_at}" %></li>
+  <li><%= "#{t("task.end_at")} : #{@task.end_at}" %></li>
+  <li><%= "#{t("task.priority")} : #{t("task.priority_option")[@task.priority]}" %></li>
+  <li><%= "#{t("task.status")} : #{t("task.status_option")[@task.status]}" %></li>
+  <li><%= "#{t(:tag)} : #{@task.tag_list}" %></li>
 </ul>
 
 <%= link_to "回首頁", root_path %>
