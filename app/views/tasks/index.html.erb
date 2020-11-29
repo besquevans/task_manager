@@ -2,12 +2,17 @@
 
 <%= search_form_for @q do |f| %>
   <div class="row">
-    <div class="col-5">
+    <div class="col-3">
       <% f.label :title_cont, t("task.title") %>
       <%= f.search_field :title_cont, placeholder: t("task.title"), class: "form-control" %>
     </div>
 
-    <div class="col-5">
+    <div class="col-3">
+      <% f.label :tags_name_cont, t(:tag) %>
+      <%= f.search_field :tags_name_cont, placeholder: t(:tag), class: "form-control" %>
+    </div>
+
+    <div class="col-3">
       <%= f.select :status_eq,
         t("task.status_option").map(&:reverse),
         {
