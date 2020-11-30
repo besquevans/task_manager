@@ -11,14 +11,13 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
   end
 
   context "title" do
-    it "search target task" do
+    before do
       create(:task, user: @user)
       create(:task, title: "Target Task", user: @user)
-
       visit tasks_path
-      expect(page).to have_content("Test Task", count: 1)
-      expect(page).to have_content("Target Task")
+    end
 
+    it "search target task" do
       fill_in(:q_title_cont, with: "g")
       click_button(I18n.t(:search))
       expect(all("tbody tr").length).to eq(1)
@@ -28,20 +27,36 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
   end
 
   context "status" do
-    it "search finish task" do
+    before do
       create(:task, status: 0, user: @user)
       create(:task, status: 1, user: @user)
       create(:task, status: 2, user: @user)
-
       visit tasks_path
-      expect(find("tbody")).to have_content(I18n.t("task.status_option")[0]).and have_content(I18n.t("task.status_option")[1]).and have_content(I18n.t("task.status_option")[2])
+    end
 
+    it "search finish task" do
       select I18n.t("task.status_option")[2], from: "q_status_eq"
       click_button(I18n.t(:search))
       #完成
       expect(find("tbody")).to have_content(I18n.t("task.status_option")[2])
       #待處理 #進行中
       expect(find("tbody")).to have_no_content(I18n.t("task.status_option")[0]).or have_no_content(I18n.t("task.status_option")[1])
+    end
+  end
+
+  context "tag" do
+    before do
+      create(:task, title: "Task1", tag_list: "tag1")
+      create(:task, title: "Task2", tag_list: "tag2")
+      create(:task, title: "Task3", tag_list: "tag2")
+      visit tasks_path
+    end
+
+    it "search 1 tag" do
+      fill_in(:q_tags_name_cont, with: "tag1")
+      click_button(I18n.t(:search))
+      expect(all("tbody tr").length).to eq(1)
+      expect(page).to have_content("Task1")
     end
   end
 end
