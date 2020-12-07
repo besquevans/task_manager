@@ -48,8 +48,7 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
     before do
       create(:task, title: "Task1", tag_list: "tag1")
       create(:task, title: "Task2", tag_list: "tag2")
-      task3 = create(:task, title: "Task3")
-      task3.update(tag_list: ["tag1", "tag2"])
+      create(:task, title: "Task3", tag_list: "tag1, tag2")
       visit tasks_path
     end
 
