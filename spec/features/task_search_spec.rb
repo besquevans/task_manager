@@ -48,8 +48,7 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
     before do
       create(:task, title: "Task1", tag_list: "tag1")
       create(:task, title: "Task2", tag_list: "tag2")
-      task3 = create(:task, title: "Task3")
-      task3.update(tag_list: ["tag1", "tag2"])
+      create(:task, title: "Task3", tag_list: "tag1, tag2")
       visit tasks_path
     end
 
@@ -62,7 +61,7 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
     end
 
     it "search tag1 + tag2" do
-      fill_in(:q_tags_name,	with: "tag1 tag2" )
+      fill_in(:q_tags_name,	with: "tag1 tag2")
       click_button(I18n.t(:search))
       expect(all("tbody tr").length).to eq(1)
       expect(page).to have_content("Task3")

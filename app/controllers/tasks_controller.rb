@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     @q = current_user.tasks.ransack(params[:q])
     @tasks = @q.result.includes(:tags)
 
-    if params[:q] && params[:q][:tags_name].present?
+    if params.dig(:q, :tags_name).present? #用 dig 直接查詢多層 hash 內是否存在值
       tags = params[:q][:tags_name].split(" ")
       @tasks = @tasks.tagged_with(tags)
     end
