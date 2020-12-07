@@ -35,7 +35,7 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
     end
 
     it "search finish task" do
-      select I18n.t("task.status_option")[2], from: "q_status_eq"
+      select(I18n.t("task.status_option")[2], from: "q_status_eq")
       click_button(I18n.t(:search))
       #完成
       expect(find("tbody")).to have_content(I18n.t("task.status_option")[2])
@@ -48,15 +48,24 @@ RSpec.feature "Search tasks", type: :feature, driver: :chrome, js: true, slow: t
     before do
       create(:task, title: "Task1", tag_list: "tag1")
       create(:task, title: "Task2", tag_list: "tag2")
-      create(:task, title: "Task3", tag_list: "tag2")
+      task3 = create(:task, title: "Task3")
+      task3.update(tag_list: ["tag1", "tag2"])
       visit tasks_path
     end
 
-    it "search 1 tag" do
-      fill_in(:q_tags_name_cont, with: "tag1")
+    it "search tag1" do
+      fill_in(:q_tags_name, with: "tag1")
+      click_button(I18n.t(:search))
+      expect(all("tbody tr").length).to eq(2)
+      expect(page).to have_content("Task1")
+      expect(page).to have_content("Task3")
+    end
+
+    it "search tag1 + tag2" do
+      fill_in(:q_tags_name,	with: "tag1 tag2" )
       click_button(I18n.t(:search))
       expect(all("tbody tr").length).to eq(1)
-      expect(page).to have_content("Task1")
+      expect(page).to have_content("Task3")
     end
   end
 end
