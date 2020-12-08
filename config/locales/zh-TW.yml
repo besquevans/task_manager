@@ -79,6 +79,7 @@ zh-TW:
   tag: "標籤"
   send: "送出"
   search: "搜尋"
+  home: "回首頁"
   #kaminari
   views:
     pagination:
